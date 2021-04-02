@@ -10,7 +10,7 @@ const expressHandlebars = require('express-handlebars');
 const port = process.env.PORT || process.env.NODE_PORT || 3000;
 
 // const dbURL = process.env.MONGODB_URI || 'mongodb://localhost/DomoMaker';
-const dbURL = 'mongodb+srv://hacuub:Five85585@cluster0.bcwxq.mongodb.net/DomoMaker';
+const dbURL = 'mongodb+srv://hacuub:Five85585@cluster0.twdhr.mongodb.net/Domomaker?retryWrites=true&w=majority';
 const mongooseOptions = {
   useNewUrlParser: true,
   useUnifiedTopology: true,
