@@ -63,6 +63,20 @@ const signup = (request, response) => {
     const newAccount = new Account.AccountModel(accountData);
     const savePromise = newAccount.save();
 
+    newAccount.save().then(() => {
+      // NEW FOR PART B
+     req.session.account = Account.AccountModel.toAPI(newAccount);
+     return res.json({ redirect: '/maker' });
+   }).catch((err) => {
+     console.log(err);
+
+     if (err.code === 11000) {
+       return res.status(400).json({ error: 'Username already in use.' });
+     }
+
+     return res.status(400).json({ error: 'An error occurred' });
+   });
+
     savePromise.then(() => {
       req.session.account = Account.AccountModel.toAPI(newAccount);
       res.json({ redirect: '/maker' });
