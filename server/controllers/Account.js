@@ -61,7 +61,7 @@ const signup = (request, response) => {
     };
 
     const newAccount = new Account.AccountModel(accountData);
-    const savePromise = newAccount.save();
+    //const savePromise = newAccount.save();
 
     newAccount.save((err, doc) => {
       if (err) {
@@ -91,7 +91,7 @@ const signup = (request, response) => {
       }
 
       return res.status(400).json({ error: 'An error has occurred' });
-    });*/
+    }); */
   });
 };
 
