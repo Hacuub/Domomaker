@@ -40,7 +40,7 @@ if (process.env.REDISCLOUD_URL) {
 }
 
 const redisClient = redis.createClient({
-  host: redis.URL.hostname,
+  host: redisURL.hostname,
   port: redisURL.port,
   password: redisPASS,
 });
