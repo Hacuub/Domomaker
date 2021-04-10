@@ -78,6 +78,7 @@ const signup = (request, response) => {
       return res.json({ redirect: '/maker' });
     });
 
+    /*
     savePromise.then(() => {
       req.session.account = Account.AccountModel.toAPI(newAccount);
       res.json({ redirect: '/maker' });
@@ -90,7 +91,7 @@ const signup = (request, response) => {
       }
 
       return res.status(400).json({ error: 'An error has occurred' });
-    });
+    });*/
   });
 };
 
