@@ -15,6 +15,19 @@ const handleDomo = (e) => {
     return false;
 };
 
+function handleDelete(id) {
+
+    const csrfValue = document.querySelector("#csrfID").value;
+
+    const postData = `_csrf=${csrfValue}&_id=${id}`;
+
+    sendAjax('DELETE', '/delete', postData, function() {
+        loadDomosFromServer();
+    });
+
+    return false;
+}
+
 const DomoForm = (props) => {
     return (
         <form id="domoForm"
@@ -30,7 +43,10 @@ const DomoForm = (props) => {
             <label htmlFor="age">Age: </label>
             <input id="domoAge" type="text" name="age" placeholder="Domo Age" />
 
-            <input type="hidden" name="_csrf" value={props.csrf} />
+            <label htmlFor="level">Level: </label>
+            <input id="domoLevel" type="text" name="level" placeholder="Domo Level" />
+
+            <input type="hidden" id = "csrfID" name="_csrf" value={props.csrf} />
             <input className="makeDomoSubmit" type="submit" value="Make Domo" />
         </form>
     );
@@ -50,6 +66,8 @@ const DomoList = function(props) {
             <div key={domo._id} className="domo">
                 <h3 className="domoName">Name: {domo.name} </h3>
                 <h3 className="domoAge">Age: {domo.age} </h3>
+                <h3 className="domoLevel">Level: {domo.level} </h3>
+                <input className="domoDelete" type="button" value="Delete" onClick={()=>handleDelete(domo._id)} />
             </div>
         );
     });

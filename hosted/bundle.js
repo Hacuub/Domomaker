@@ -17,6 +17,15 @@ var handleDomo = function handleDomo(e) {
   return false;
 };
 
+function handleDelete(id) {
+  var csrfValue = document.querySelector("#csrfID").value;
+  var postData = "_csrf=".concat(csrfValue, "&_id=").concat(id);
+  sendAjax('DELETE', '/delete', postData, function () {
+    loadDomosFromServer();
+  });
+  return false;
+}
+
 var DomoForm = function DomoForm(props) {
   return (/*#__PURE__*/React.createElement("form", {
       id: "domoForm",
@@ -39,8 +48,16 @@ var DomoForm = function DomoForm(props) {
       type: "text",
       name: "age",
       placeholder: "Domo Age"
+    }), /*#__PURE__*/React.createElement("label", {
+      htmlFor: "level"
+    }, "Level: "), /*#__PURE__*/React.createElement("input", {
+      id: "domoLevel",
+      type: "text",
+      name: "level",
+      placeholder: "Domo Level"
     }), /*#__PURE__*/React.createElement("input", {
       type: "hidden",
+      id: "csrfID",
       name: "_csrf",
       value: props.csrf
     }), /*#__PURE__*/React.createElement("input", {
@@ -69,7 +86,16 @@ var DomoList = function DomoList(props) {
         className: "domoName"
       }, "Name: ", domo.name, " "), /*#__PURE__*/React.createElement("h3", {
         className: "domoAge"
-      }, "Age: ", domo.age, " "))
+      }, "Age: ", domo.age, " "), /*#__PURE__*/React.createElement("h3", {
+        className: "domoLevel"
+      }, "Level: ", domo.level, " "), /*#__PURE__*/React.createElement("input", {
+        className: "domoDelete",
+        type: "button",
+        value: "Delete",
+        onClick: function onClick() {
+          return handleDelete(domo._id);
+        }
+      }))
     );
   });
   return (/*#__PURE__*/React.createElement("div", {
